@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackOverFlowImitationsProject", "StackOverFlowImitationsProject\StackOverFlowImitationsProject.csproj", "{8149D3B6-FAEE-45CD-8DC5-4062757871E2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8149D3B6-FAEE-45CD-8DC5-4062757871E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8149D3B6-FAEE-45CD-8DC5-4062757871E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8149D3B6-FAEE-45CD-8DC5-4062757871E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8149D3B6-FAEE-45CD-8DC5-4062757871E2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CCE61C00-3950-4F9A-9ED5-EE6AE19C36F1}
+	EndGlobalSection
+EndGlobal

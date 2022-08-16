@@ -2,3 +2,6 @@
 Added to the projec the SQL query used to create the database
 had to remove "cascade on delete" for both answers and votes to avoid cascading path (put NO ACTION)
 
+
+
+

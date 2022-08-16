@@ -103,6 +103,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="SQLQuery1 to create stackoverflow database.sql" />
+    <Content Include="Notes.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

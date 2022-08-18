@@ -56,3 +56,19 @@ for the primary key, add:
  public virtual User User { get; set; }
  where the IDs are columns specfiied above it as part of the Question model
 
+ ---------------
+ when adding DBContext in DomainModels - "rule" is that the class name is identical to the connection string name
+
+ -------------------
+ in this project, we did not directly specify a data access layer as EF acts as the data access layer. We just need to implement the repository
+ layer to perform CRUD operations vs. EF
+
+ in addition, it is best to add interfaces for the repository - here we are not doing it as a separate project, but building the interfaces within the repositotires
+
+ ---------------------
+
+ to find the latest user ID, use Linq to simply select all and give the max:
+ db.Users.Select(y => y.UserID).Max();
+
+ ----------------------------------------
+

@@ -163,6 +163,27 @@ using AutoMapper.Configuration;
 
 --------------------------
 
+EF is a data access logic so will be absent from the service layer in which it is all business logic
+service layer talks repository layer which talke to the data layer (the DB); we leverage the different view models in the service layer 
+and use AutoMapper to map them back to DomainModels that the repository layer can consume
+this works in this manner as the controllers are the ones calling the service layer and they have no notion of the DomainModels
+and only know the ViewModels
+
+--------------------------------
+used automapper code to move from viewmodel to domainmodel:
+var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<EditUserDetailsViewModel, User>();
+                cfg.IgnoreUnmapped();
+            });
+            IMapper mapper = config.CreateMapper();           
+            User u = mapper.Map<EditUserDetailsViewModel, User>(uvm); //left is the source type, right is the destination type, like massive casting
+
+-------------------------------------------------
+
+
+
+
+
 
 
 

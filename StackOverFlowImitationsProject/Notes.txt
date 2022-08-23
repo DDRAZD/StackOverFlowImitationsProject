@@ -104,8 +104,64 @@ after creating the different classes of view models, you can start using them wi
  Install-Package AutoMapper -Version 7.0.1
 
  Automapper allows to mapp viewmodel to domain model and viceversa
+ Automapper exentsions allow to ignore unmatched properties between ViewModel and DomainModel, without them, exception would be raised
+
+ to handle:
+-  add to servicelayer class of MapperExensions. 
+- make is a static class
+- import "using AutoMapper"
+- add the following code:
+private static void IgnoreUnmappedProperties(TypeMap map, IMappingExpression expr)
+        {
+            foreach(string propName in map.GetUnmappedPropertyNames())
+            {
+                if(map.SourceType.GetProperty(propName) != null)
+                {
+                    expr.ForMember(propName, opt => opt.Ignore());
+                }
+                if(map.DestinationType.GetProperty(propName) != null)
+                {
+                    expr.ForMember(propName, opt => opt.Ignore());
+                }
+            }
+        }
+       public static void IgnoreUnmapped(this IProfileExpression profile)
+        {
+            profile.ForAllMaps(IgnoreUnmappedProperties); //calling the above function
+        }
+
+I have put the code (pasted it) in the toolbox of visual studio for quick reference
+
+--------------------------------------
+implement a helper to hash the password (i also put it in visual studio toolbox)
+
+using System.Security.Cryptography;
+
+public class SHA256HashGenerator
+    {
+        public static string GenerateHash(string inputData)
+        {
+            using (SHA256 sha256Hash=SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(inputData));
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
+    }
 
 
+    --------------------------------------
+    in the different service layer classes, as they will handle both domain models and view models, you need:
+
+using AutoMapper;
+using AutoMapper.Configuration;
+
+--------------------------
 
 
 

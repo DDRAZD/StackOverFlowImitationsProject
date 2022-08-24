@@ -46,22 +46,71 @@ namespace StackOverFlowProject.ServiceLayer
 
         public UserViewModel GetUserByEmail(string Email)
         {
-            throw new NotImplementedException();
+            User u = ur.GetUserByEmail(Email).FirstOrDefault();
+            UserViewModel uvm = null;
+            if (u != null) //only if we actually found something, we need to migrate from user to uvm
+            {
+                //convert to UVM:
+                var config = new MapperConfiguration(cfg => {
+                    cfg.CreateMap<User, UserViewModel>();
+                    cfg.IgnoreUnmapped();
+                });
+                IMapper mapper = config.CreateMapper();
+                uvm = mapper.Map<User, UserViewModel>(u); //left is the source type, right is the destination type, like massive casting
+            }
+
+            return uvm;
         }
 
         public UserViewModel GetUserByEmailandPassword(string Email, string Password)
         {
-            throw new NotImplementedException();
+            string passwordHash = SHA256HashGenerator.GenerateHash(Password); //creating the password hash
+
+            User u = ur.GetUsersByEmailAndPassword(Email, passwordHash).FirstOrDefault();
+            UserViewModel uvm = null;
+            if(u != null) //only if we actually found something, we need to migrate from user to uvm
+            {
+                //convert to UVM:
+                var config = new MapperConfiguration(cfg => {
+                    cfg.CreateMap<User, UserViewModel>();
+                    cfg.IgnoreUnmapped();
+                });
+                IMapper mapper = config.CreateMapper();
+                uvm = mapper.Map<User, UserViewModel>(u); //left is the source type, right is the destination type, like massive casting
+            }
+            
+            return uvm;
         }
 
         public UserViewModel GetUserByUserID(int UserID)
         {
-            throw new NotImplementedException();
+            User u = ur.GetUserByUserID(UserID).FirstOrDefault();
+            UserViewModel uvm = null;
+            if (u != null) //only if we actually found something, we need to migrate from user to uvm
+            {
+                //convert to UVM:
+                var config = new MapperConfiguration(cfg => {
+                    cfg.CreateMap<User, UserViewModel>();
+                    cfg.IgnoreUnmapped();
+                });
+                IMapper mapper = config.CreateMapper();
+                uvm = mapper.Map<User, UserViewModel>(u); //left is the source type, right is the destination type, like massive casting
+            }
+
+            return uvm;
         }
 
         public List<UserViewModel> GetUsers()
         {
-            throw new NotImplementedException();
+            List<User> u = ur.GetAllUsers();
+            //convert to UVM:
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<User, UserViewModel>();
+                cfg.IgnoreUnmapped();
+            });
+            IMapper mapper = config.CreateMapper();
+            List<UserViewModel> userViewModel = mapper.Map<List<User>, List<UserViewModel>>(u); //left is the source type, right is the destination type, like massive casting
+            return userViewModel; 
         }
 
         public int InserUser(RegisterViewModel uvm)

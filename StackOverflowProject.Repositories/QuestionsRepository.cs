@@ -27,7 +27,7 @@ namespace StackOverflowProject.Repositories
         /// this will only increment
         /// </summary>
         /// <param name="qid"></param>
-        void UpdateQuestionViewsCounter(int qid);
+        void UpdateQuestionViewsCounter(int qid, int value);
         void DeleteQuestion(int qid);
         List<Question> GetAllQuestions();
         List<Question> GetQuestionByQuestionID(int qid);
@@ -92,12 +92,12 @@ namespace StackOverflowProject.Repositories
             }
         }
 
-        public void UpdateQuestionViewsCounter(int qid)
+        public void UpdateQuestionViewsCounter(int qid, int value)
         {
             Question q = db.Questions.Where(y => y.QuestionID == qid).FirstOrDefault();
             if (q != null)
             {
-                q.ViewsCounter++; ;
+                q.ViewsCounter= q.ViewsCounter+value; 
                 db.SaveChanges();
             }
         }

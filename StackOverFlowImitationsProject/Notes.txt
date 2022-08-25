@@ -181,6 +181,35 @@ var config = new MapperConfiguration(cfg => {
 -------------------------------------------------
 
 
+Carrying foreign key mapping from DomainModel to ViewModel
+
+I have in domain model, the question table pointing to answers table which points to the votes table
+We did so with virtual property and foreign keys
+to carry it through to the ViewModels, we need to map those using the following code (this is copied from instructor):
+"
+Since the Questions table has foreign keys, you need to add mapping to the following models also.
+
+User -> UserViewModel.
+
+Category -> CategoryViewModel.
+
+So add this code while retrieving questions from questions table i.e. in "GetQuestions" and "GetQuestionByQuestionID" methods in "QuestionsService".
+
+var config = new MapperConfiguration(cfg => {
+cfg.CreateMap<Question, QuestionViewModel>();
+cfg.CreateMap<User, UserViewModel>();
+cfg.CreateMap<Category, CategoryViewModel>();
+cfg.CreateMap<Answer, AnswerViewModel>();
+cfg.CreateMap<Vote, VoteViewModel>();
+cfg.IgnoreUnmapped();
+});
+
+
+Use the same mapping configuration every time when you retrieving data from "questions" or "answers" table.
+
+"
+
+
 
 
 

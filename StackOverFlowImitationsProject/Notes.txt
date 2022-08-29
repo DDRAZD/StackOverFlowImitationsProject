@@ -209,6 +209,92 @@ Use the same mapping configuration every time when you retrieving data from "que
 
 "
 
+-----------------------------------------------------------------------
+moving to front end (controllers and views):
+
+in main project, just install:
+
+install-package jQuery
+install-package Popper.js
+install-package Bootstrap
+
+-------------------------------------------------
+to optimize payload and perforfomance, we will use bundles. This way, when the browser calls the server when loading the layout page and the difference 
+js scripts, it will not go one by one, but load all the needed scripts as a bundle
+
+To do so, at the top line project:
+
+install-package Microsoft.AspNet.Web.Optimization
+
+Then, we need to add a config file that will create a bundle (bundle will be for a jQuery, bootstrap and popper.js files) -> go to App_Start folder and add:
+
+BundleConfig.cs
+
+add: using System.Web.Optimization;
+
+create static method:
+
+public class BundleConfig
+    {
+        /// <summary>
+        /// this method needs to be invoked in the global.asax file with " App_Start.BundleConfig.RegisterBundles(BundleTable.Bundles);"
+        /// </summary>
+        /// <param name="bundles"></param>
+        public static void RegisterBundles(BundleCollection bundles)
+        {
+            //bundle names are user defined
+
+            //creating a bundle called "bootstrap" in scripts, comprising of 3 js files that are sufficient to run bootstrap
+            bundles.Add(new ScriptBundle("~/Scripts/bootstrap").Include("~/Scripts/jquery-3.6.0.js", "~/Scripts/umd/popper.js", "~/Scripts/bootstrap.js"));
+
+            //creating a bundle for styles
+            bundles.Add(new StyleBundle("~/Styles/bootstrap").Include("~/Content/bootstrap.css"));
+
+            //you are free to add styles or scrips as you wish to the bundles, but the above are the base ones for bootstrap
+            //for example, add a Web file in "Content" of the main application names Styles.css, then create a bundle for it:
+            bundles.Add(new StyleBundle("~/Styles/site").Include("~/Content/Sytles.css"));
+
+            //after creation of the bundles, we need to enable optimization:
+            BundleTable.EnableOptimizations = true;
+
+        }
+    }
+    -------------------------------------------------
+
+    add "Shared" folder in views, where it is best to add layout pages
+
+    -------------------------------------------------------
+    add layout page (Add Item -> Web -> MVC -> MVC 5 Layout Page (Razor))
+
+    ---------------------------------------------------
+
+    in layout page, rendering the bundles to be sent to the browser:
+    @using System.Web.Optimization
+    
+    and in the <head>:
+    @Scripts.Render("~/Scripts/bootstrap")
+    @Styles.Render("~/Styles/bootstrap")
+    @Styles.Render("~/Styles/site")
+
+    -------------------------------------
+    even without using any Owin or identity, within Razor you can check for user login using the following code in the layout (to present in navbar only if no
+    user has logged in):
+
+     @if (Session["CurrentUserName"] == null)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account/register">Register</a>
+                    </li>
+                }
+
+    ----------------------------------------------------------
+
+
+
+
 
 
 

@@ -6,11 +6,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta charset="utf-8" />
-    <title>@ViewBag.Title StackOverFlow</title>
-
-
-
-
+    <title>@ViewBag.Title - StackOverFlow</title>
 
 
     @Scripts.Render("~/Scripts/bootstrap")
@@ -79,10 +75,9 @@
 
             </div>
             <!--search-->
-            <form class="form-inline" action="/home/search">
-                <input type="search" class="form-control mr-sm-2" style="width:150px" placeholder="Search" name="str" />
+            <form class="d-flex align-items-center flex-nowrap" action="/home/search">
+                <input type="search" class="form-control mr-sm-2" style="width:120px" placeholder="Search" name="str" />
                 <button class="btn btn-success">Search</button>
-
             </form>
         </nav>
 

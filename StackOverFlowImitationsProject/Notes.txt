@@ -292,6 +292,20 @@ public class BundleConfig
 
     ----------------------------------------------------------
 
+    to override bootstrap in some cases, like showing different color in navbar, we can use the user created "Styles.css" and add "important":
+    
+#active
+{
+    color: yellow !important;
+}
+
+.navbar a:link, .navbar a:visited
+{
+    color: white !important
+}----------------------------------------------------
+
+
+
 
 
 

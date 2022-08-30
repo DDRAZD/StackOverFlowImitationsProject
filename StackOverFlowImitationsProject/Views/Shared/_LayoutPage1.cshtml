@@ -42,9 +42,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/allquestions">Questions</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/home/inedx">Home</a>
-                    </li>
+                    
                     <!--login and register section of the navbar:-->
                     @if (Session["CurrentUserName"] == null)
                     {
@@ -82,7 +80,7 @@
         </nav>
 
         @RenderBody()
-    </div> <!--everything should always be inside container fluid - this closes it-->
+    </div> <!--everything should always be inside container fluid - this closes it (comes from layout page in case you view in ViewSource)-->
    
       
     

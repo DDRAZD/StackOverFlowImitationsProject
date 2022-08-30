@@ -304,6 +304,34 @@ public class BundleConfig
     color: white !important
 }----------------------------------------------------
 
+adding dependancy injection:
+
+install-package unity.Mvc for the project level (i.e. not the c# libraries projects)-> file UnityConfig.cs will be aututomatically created in App_start in UnityConfig.cs, import the servicecontracts and service layer (That will be injected)
+
+here i did:
+install-package Unity.Mvc5 (in main project as the controllers are there)
+
+add  UnityConfig.RegisterComponents();   to the global.asax file (this will be mentioned to you automatically from the READ.ME that comes from the 
+unit.mvc5 installation)
+
+this simply register the componenets you will be injecting later - > you will have to create the registration method in the config (unityconfig.cs)
+
+We also need to install another dependancy injection package, but not for MVC (not for the controllers), but for API -> it will collide with the package we just installed
+
+install-package Unity.WebApi
+
+it will ask to override UnityCofig.cs, say "yes"
+
+because it overriden UnityConfig.cs, add manually in that file:
+using Unity.Mvc5;
+using System.Web.Mvc;
+
+allow both dependnacy injection of MVC and WebAPI:
+DependencyResolver.SetResolver(new Unity.Mvc5.UnityDependencyResolver(container));//because we have both WebAPI and MVC dependancy injection, we need 
+//to align them, hence we are sending the MVC resolver to the other resolver
+
+GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);//this allows dependancy injection for WebAPI
+
 
 
 

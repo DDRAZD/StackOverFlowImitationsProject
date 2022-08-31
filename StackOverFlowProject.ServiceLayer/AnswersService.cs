@@ -9,7 +9,7 @@ using StackOverflowProject.Repositories;
 using AutoMapper;
 using AutoMapper.Configuration;
 
-namespace StackOverFlowProject.ServiceLayer
+namespace StackOverflowProject.ServiceLayer
 {
     public interface IAnswersService
     {

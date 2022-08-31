@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 
-namespace StackOverFlowProject.ServiceLayer
+namespace StackOverflowProject.ServiceLayer
 {
      public static class MapperExtensions
     {

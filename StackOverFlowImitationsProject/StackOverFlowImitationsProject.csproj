@@ -154,6 +154,7 @@
     <Content Include="Images\Chrome-Logo.png" />
     <Content Include="Images\down-color.png" />
     <Content Include="Images\down-empty.png" />
+    <Content Include="Images\offices_svg.svg" />
     <Content Include="Images\up-color.png" />
     <Content Include="Images\up-empty.png" />
     <Content Include="Images\user avatar.jpg" />
@@ -280,6 +281,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -305,6 +307,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Question.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

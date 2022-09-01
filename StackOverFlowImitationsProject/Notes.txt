@@ -333,7 +333,24 @@ DependencyResolver.SetResolver(new Unity.Mvc5.UnityDependencyResolver(container)
 GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);//this allows dependancy injection for WebAPI
 
 
+--------------------------------
+the different data annotations you added to viewmodels check on the server side the validity of each field and updates 
+the value of "ModelState"
 
+you need to check on the contoller side that the the model state is good:
+
+
+"
+if(ModelState.IsValid)
+{
+                Session["CurrentUserID"]=uid;
+                Session["CurrentUserName"] = rvm.Name;
+                Session["CurrentUserEmail"]=rvm.Email;
+                Session["CurrentUserPassword"] = rvm.Password;
+                Session["CurrentUserIsAdmin"] = false;
+}
+"
+notice how we set the Session's variables -> it is like a session ViewBag
 
 
 

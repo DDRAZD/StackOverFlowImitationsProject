@@ -24,5 +24,27 @@ namespace StackOverFlowImitationsProject.Controllers
         {
             return View();
         }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Register(RegisterViewModel rvm)
+        {
+            if(ModelState.IsValid)
+            {
+                int uid = this.us.InserUser(rvm);
+                Session["CurrentUserID"]=uid;
+                Session["CurrentUserName"] = rvm.Name;
+                Session["CurrentUserEmail"]=rvm.Email;
+                Session["CurrentUserPassword"] = rvm.Password;
+                Session["CurrentUserIsAdmin"] = false;
+                return RedirectToAction("index", "home");
+
+            }
+            else
+            {
+                ModelState.AddModelError("x", "invliad data");
+                return View();
+            }
+            
+        }
     }
 }

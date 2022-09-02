@@ -15,7 +15,7 @@
                         Looks good!
                     </div>
                     <div class="invalid-feedback">
-                        Looks bad!
+                       Only alphabet allowed, no numbers or special characthers 
                     </div>
                 </div>
             </div>
@@ -28,8 +28,9 @@
                         Looks good!
                     </div>
                     <div class="invalid-feedback">
-                        Looks bad!
+                       Invalid email
                     </div>
+                    <small class="email-exist text-danger"></small>
                 </div>
                 <div class="form-group col-sm-6">
                     <label for="txtMobile">Mobile</label>
@@ -91,4 +92,29 @@
         return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     }
 
+    $("#txtEmail").blur(function ()
+    {
+        $.ajax({
+            url: "/api/account?email=" + $("#txtEmail").val(), type: "GET", success:
+                function (response)
+                {
+                    if (response == "Not Found")
+                    {
+                        $(".email-exist").text("");
+                        $(".email-exist").parent("form-group").find(".valid-feedback").css("color", "#28a745");
+                    }
+                    else
+                    {//the email is already found
+                        $(".email-exist").text("email already exists");
+                        $(".email-exist").parent("form-group").find(".valid-feedback").css("color", "white");
+                    }
+                },
+            error: function ()
+            {
+                $(".email-exist").text("Error");
+            }
+        });
+
+    });
+               
 </script>

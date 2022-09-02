@@ -21,7 +21,7 @@
             </div>
 
             <div class="form-row ">
-                <div class="form-group col-sm-6">
+                <div class="form-group col-sm-6" id="somename">
                     <label for="txtEmail">Email</label>
                     <input type="email" class="form-control" id="txtEmail" placeholder="Enter Email" name="Email" required="required" />
                     <div class="valid-feedback">
@@ -101,12 +101,12 @@
                     if (response == "Not Found")
                     {
                         $(".email-exist").text("");
-                        $(".email-exist").parent("form-group").find(".valid-feedback").css("color", "#28a745");
+                        $(".email-exist").parent().find("div").css("color", "#28a745");
                     }
                     else
                     {//the email is already found
                         $(".email-exist").text("email already exists");
-                        $(".email-exist").parent("form-group").find(".valid-feedback").css("color", "white");
+                        $(".email-exist").parent().find("div").css("color", "white");
                     }
                 },
             error: function ()

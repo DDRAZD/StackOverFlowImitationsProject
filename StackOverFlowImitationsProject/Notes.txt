@@ -351,6 +351,12 @@ if(ModelState.IsValid)
 }
 "
 notice how we set the Session's variables -> it is like a session ViewBag
+-----------------------
+
+Install-Package bootstrap -Version 4.6.1
+had to move to boostrap 4 from bootsrap 5 to avoid form-group and dropdown presentation bugs
+
+
 
 
 

@@ -21,7 +21,7 @@ namespace StackOverflowProject.ViewModels
         public string ConfrimPassword { get; set; }
 
         [Required]
-        [RegularExpression(@"^[a-zA-Z ]*$")]
+       [RegularExpression(@"^[a-zA-Z ]*$")]
         public string Name { get; set; }
         [Required]
         public string Mobile { get; set; }

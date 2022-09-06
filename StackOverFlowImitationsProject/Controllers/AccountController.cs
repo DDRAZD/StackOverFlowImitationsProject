@@ -46,5 +46,56 @@ namespace StackOverFlowImitationsProject.Controllers
             }
             
         }
+
+        public  ActionResult Login()
+        {
+            
+            LoginViewModel lvm = new LoginViewModel(); //creating an empty one and going to transfer it to view to be filled
+            
+            return View(lvm);
+
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Login(LoginViewModel lvm)
+        {
+            if(ModelState.IsValid) //this is checked with data annotations autmoatically at the lvm level (LoginViewModel.cs)
+            {
+                UserViewModel uvm = this.us.GetUserByEmailandPassword(lvm.Email, lvm.Password);
+                if(uvm != null)
+                {
+
+                    Session["CurrentUserID"] = uvm.UserID;
+                    Session["CurrentUserName"] = uvm.Name;
+                    Session["CurrentUserEmail"] = uvm.Email;
+                    Session["CurrentUserPassword"] = uvm.Password;
+                    Session["CurrentUserIsAdmin"] = uvm.IsAdmin;
+
+                    if(uvm.IsAdmin==true)
+                    {
+                        return RedirectToRoute(new { area = "admin", controller = "AdminHome", action = "Index" });
+                    }
+                    else
+                    {
+                        return RedirectToAction("index", "home");
+                    }
+
+                }
+                else
+                {
+                    ModelState.AddModelError("x", "invliad EMail /Password"); //this will appear in the html validation summary
+                    return View(lvm);
+                }                    
+
+            }
+            else
+            {
+                ModelState.AddModelError("x", "invalid data");//this will appear in the html validation summary
+                return View(lvm);
+            }
+
+         
+
+        }
     }
 }

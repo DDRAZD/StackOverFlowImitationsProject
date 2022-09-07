@@ -94,7 +94,48 @@ namespace StackOverFlowImitationsProject.Controllers
                 return View(lvm);
             }
 
-         
+        }
+
+        public ActionResult Logout()
+        {
+           Session.Abandon();            
+           return RedirectToAction("index","Home");
+        }
+
+        public ActionResult ChangeProfile()
+        {
+            int uid = Convert.ToInt32(Session["CurrentUserID"]);
+            UserViewModel user = this.us.GetUserByUserID(uid);
+            EditUserDetailsViewModel eudvm = new EditUserDetailsViewModel() //copying it to edit user view model
+            {
+                Name = user.Name,
+                Email = user.Email,
+                Mobile = user.Mobile,
+                UserId = user.UserID
+            };
+
+            return View(eudvm);
+            
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ChangeProfile(EditUserDetailsViewModel eudvm)
+        {
+            if(ModelState.IsValid)//done on the data annotations in the EditUserDetailsViewModel.cs checks
+            {
+                eudvm.UserId = Convert.ToInt32(Session["CurrentUserID"]);
+                this.us.UpdateUserDetail(eudvm);
+               
+                Session["CurrentUserName"] = eudvm.Name;
+                         
+                
+                return RedirectToAction("index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("x", "invalid data");//this will appear in the html validation summary
+                return View(eudvm);
+            }
 
         }
     }

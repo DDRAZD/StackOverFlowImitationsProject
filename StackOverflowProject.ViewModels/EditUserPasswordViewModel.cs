@@ -21,7 +21,7 @@ namespace StackOverflowProject.ViewModels
         
         [Required]       
         [Compare("Password")]
-        public bool ConfirmPassword { get; set; }
+        public string ConfirmPassword { get; set; }
 
     }
 }

@@ -13,13 +13,15 @@ namespace StackOverFlowImitationsProject.Controllers
     public class HomeController : Controller
     {
         IQuestionService qs;
+        ICategoriesService cs;
 
 
         //constructor
 
-        public HomeController(IQuestionService qs)
+        public HomeController(IQuestionService qs, ICategoriesService cs)
         {
             this.qs = qs; //dependnacy injection
+            this.cs = cs;
         }
 
         // GET: Home
@@ -40,6 +42,13 @@ namespace StackOverFlowImitationsProject.Controllers
             return View();
         }
 
-       
+        public ActionResult Categories()
+        {
+           List<CategoryViewModel> categories= this.cs.GetAllCategories();
+
+           return View(categories);
+        }
+
+
     }
 }

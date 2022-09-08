@@ -138,5 +138,37 @@ namespace StackOverFlowImitationsProject.Controllers
             }
 
         }
+
+        public ActionResult ChanagePassword()
+        {
+            int uid = Convert.ToInt32(Session["CurrentUserID"]);
+            EditUserPasswordViewModel eupvm = new EditUserPasswordViewModel();
+            UserViewModel user  = this.us.GetUserByUserID(uid);
+
+            eupvm.Password = "";
+            eupvm.UserID = user.UserID;
+            eupvm.Email = user.Email;
+            eupvm.ConfirmPassword = "";
+
+            return View(eupvm);//sending the viewmodel to be edited and given back
+
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ChanagePassword(EditUserPasswordViewModel eupvm)
+        {
+
+            if(ModelState.IsValid)
+            {
+                this.us.UpdateUserPassowrd(eupvm);
+                return RedirectToAction("index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("somekey", "password invalid");
+                return View(eupvm);
+            }
+
+        }
     }
 }

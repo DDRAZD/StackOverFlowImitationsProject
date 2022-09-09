@@ -361,7 +361,23 @@ to build Api for the Ajax to go after - create a folder of ApiControllers in the
 
 add WebApi controller (empty as usual)
 
+---------------------------------------
+attribute routing:
 
+go to RouteConfig.cs in the App_start
+and add:
+routes.MapMvcAttributeRoutes();
+
+this way, we can add the attribute of routes over the method. 
+For example, for Questions, instead of /home/questions, we can add a routing which is more user friendly such as:
+allquestions
+
+This is done by adding:
+[Route("allquestions")] as an annotation before the method
+
+the route is mutually exclusive - as in , /home/questions will no longer work, only /allquestions
+
+-----------------------------------------------
 
 
 

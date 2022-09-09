@@ -291,6 +291,8 @@
     <Content Include="Views\Account\ChangeProfile.cshtml" />
     <Content Include="Views\Account\ChanagePassword.cshtml" />
     <Content Include="Views\Home\Categories.cshtml" />
+    <Content Include="Views\Home\Questions.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

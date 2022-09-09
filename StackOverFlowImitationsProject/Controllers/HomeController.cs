@@ -28,7 +28,7 @@ namespace StackOverFlowImitationsProject.Controllers
         public ActionResult Index()
         {
             //dsiplaying the latest questions
-            List<QuestionViewModel> questions =  this.qs.GetAllQuestions().Take(10).ToList(); //taking just the top 10
+            List<QuestionViewModel> questions = this.qs.GetAllQuestions().Take(10).ToList(); //taking just the top 10
             return View(questions);
         }
 
@@ -44,9 +44,32 @@ namespace StackOverFlowImitationsProject.Controllers
 
         public ActionResult Categories()
         {
-           List<CategoryViewModel> categories= this.cs.GetAllCategories();
+            List<CategoryViewModel> categories = this.cs.GetAllCategories();
 
-           return View(categories);
+            return View(categories);
+        }
+
+        [Route("allquestions")]
+        public ActionResult Questions()
+        {
+            List<QuestionViewModel> questions = this.qs.GetAllQuestions();
+            return View(questions);
+        }
+        /// <summary>
+        /// searches questions; str is named in the layout page when the search box is implemented
+        /// </summary>
+        /// <param name="str"></param> 
+        /// <returns></returns>
+        public ActionResult Search(string str)
+        {
+            List<QuestionViewModel> questions = this.qs.GetAllQuestions().Where(
+                x =>
+                x.QuestionName.ToLower().Contains(str.ToLower())||
+                x.Category.CategoryName.ToLower().Contains(str.ToLower())).ToList(); //tolower makes it case insensitive
+
+            ViewBag.str = str;
+
+            return View(questions);
         }
 
 

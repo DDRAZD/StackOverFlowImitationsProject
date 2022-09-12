@@ -97,7 +97,7 @@ namespace StackOverflowProject.Repositories
             Question q = db.Questions.Where(y => y.QuestionID == qid).FirstOrDefault();
             if (q != null)
             {
-                q.ViewsCounter= q.ViewsCounter+value; 
+                q.ViewsCounter = q.ViewsCounter + value; 
                 db.SaveChanges();
             }
         }

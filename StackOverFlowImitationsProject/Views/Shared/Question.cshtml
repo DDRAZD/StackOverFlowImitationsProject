@@ -3,9 +3,9 @@
 <tr>
     <td><span class="badge bg-secondary">@Model.VotesCount</span> Votes</td>
     <td><span class="badge bg-secondary">@Model.AnswersCount</span> Answers</td>
-    <td><span class="badge bg-secondary">@Model.ViewsCount</span> Views</td>
+    <td><span class="badge bg-secondary">@Model.ViewsCounter</span> Views</td>
     <td class="text-dark">
-        <a href="/questions/view/@Model.QuestionID" class="text-primary"> @Model.QuestionName </a>
+        <a href="/question/view/@Model.QuestionID" class="text-primary"> @Model.QuestionName </a>
         <br />
         <span class="badge bg-info">@Model.Category.CategoryName</span>
     </td>

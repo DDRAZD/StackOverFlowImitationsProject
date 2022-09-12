@@ -28,7 +28,7 @@ namespace StackOverflowProject.ViewModels
         [Required]
         public int AnswersCount { get; set; }
         [Required]
-        public int ViewsCount { get; set; }
+        public int ViewsCounter { get; set; }
 
         public virtual UserViewModel User { get; set; }
         public virtual CategoryViewModel Category { get; set; }

@@ -12,7 +12,7 @@ namespace StackOverflowProject.ServiceLayer
         private static void IgnoreUnmappedProperties(TypeMap map, IMappingExpression expr)
         {
             foreach(string propName in map.GetUnmappedPropertyNames())
-            {
+             {
                 if(map.SourceType.GetProperty(propName) != null)
                 {
                     expr.ForMember(propName, opt => opt.Ignore());

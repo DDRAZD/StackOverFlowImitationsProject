@@ -11,10 +11,11 @@ namespace StackOverflowProject.ViewModels
     public class AnswerViewModel
     {
 
+        public int AnswerID { get; set; }
         [Required]
         public string AnswerText { get; set; }
         [Required]
-        public DateTime AnswerDateAndTime { get; set; }
+        public DateTime AnsersDateAndTime { get; set; }
         [Required]
         public int UserID { get; set; }
         [Required]

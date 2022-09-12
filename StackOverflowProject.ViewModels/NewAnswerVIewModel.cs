@@ -14,7 +14,7 @@ namespace StackOverflowProject.ViewModels
         [Required]
         public string AnswerText { get; set; }
         [Required]
-        public DateTime AnswerDateAndTime { get; set; }
+        public DateTime AnsersDateAndTime { get; set; }
         [Required]
         public int UserID { get; set; }
         [Required]

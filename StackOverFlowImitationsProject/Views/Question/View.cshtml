@@ -215,3 +215,12 @@
 
     });
 </script>
+
+<script>
+    $(".editbutton").click(function ()
+    {
+        $(this).parent().find(".needs-validation").show();//make the hidden field visible
+        $(this).hide(); // hite the button post cllck
+        $(this).parent().find(".answer").hide();//refers to the <p> tag; answer will be hidden once we click "edit"
+    });
+</script>

@@ -378,7 +378,9 @@ This is done by adding:
 the route is mutually exclusive - as in , /home/questions will no longer work, only /allquestions
 
 -----------------------------------------------
-
+Adding filters -  using System.Web.Mvc;
+create your custom filter and have it inherit from FilterAttribute
+if you want it to be authorization filter, have it also inherit from IAuthorizationFilter
 
 
 

@@ -15,8 +15,8 @@ namespace StackOverflowProject.ServiceLayer
     public interface IQuestionService
     {
 
-        void InsertQuestion(NewAnswerVIewModel qvm);
-        void UpdateQuestionDetails(EditAnswerViewModel qvm);
+        void InsertQuestion(NewQuestionVIewModel qvm);
+        void UpdateQuestionDetails(EditQuestionVIewModel qvm);
         void UpdateQuestionVotesCount(int qid, int value);
         void UpdateQuestionAsnwersCount(int qid, int value);
         void UpdateQuestionViewsCount(int qid, int value);  
@@ -104,15 +104,15 @@ namespace StackOverflowProject.ServiceLayer
             return qvm;
         }
 
-        public void InsertQuestion(NewAnswerVIewModel qvm)
+        public void InsertQuestion(NewQuestionVIewModel qvm)
         {
             //mapping to move it to DomainModel
             var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<NewAnswerVIewModel, Question>();
+                cfg.CreateMap<NewQuestionVIewModel, Question>();
                 cfg.IgnoreUnmapped();
             });
             IMapper mapper = config.CreateMapper();           
-            Question questionToInsert = mapper.Map<NewAnswerVIewModel, Question>(qvm); //left is the source type, right is the destination type, like massive casting
+            Question questionToInsert = mapper.Map<NewQuestionVIewModel, Question>(qvm); //left is the source type, right is the destination type, like massive casting
 
             qr.InsertQuestion(questionToInsert);
         }
@@ -122,15 +122,15 @@ namespace StackOverflowProject.ServiceLayer
             qr.UpdateQuestionAnswersCounter(qid, value);
         }
 
-        public void UpdateQuestionDetails(EditAnswerViewModel qvm)
+        public void UpdateQuestionDetails(EditQuestionVIewModel qvm)
         {
             //mapping to move it to DomainModel
             var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<EditAnswerViewModel, Question>();
+                cfg.CreateMap<EditQuestionVIewModel, Question>();
                 cfg.IgnoreUnmapped();
             });
             IMapper mapper = config.CreateMapper();
-            Question q = mapper.Map<EditAnswerViewModel, Question>(qvm); //left is the source type, right is the destination type, like massive casting
+            Question q = mapper.Map<EditQuestionVIewModel, Question>(qvm); //left is the source type, right is the destination type, like massive casting
 
 
             qr.UpdateQuestionDetails(q);

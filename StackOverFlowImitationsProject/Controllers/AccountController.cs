@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using StackOverflowProject.ViewModels;
 using StackOverflowProject.ServiceLayer;
+using StackOverFlowImitationsProject.Filters;
 
 
 namespace StackOverFlowImitationsProject.Controllers
@@ -96,12 +97,14 @@ namespace StackOverFlowImitationsProject.Controllers
 
         }
 
+        [UserAuthorizationFIlterAttribute]
         public ActionResult Logout()
         {
            Session.Abandon();            
            return RedirectToAction("index","Home");
         }
 
+        [UserAuthorizationFIlterAttribute]
         public ActionResult ChangeProfile()
         {
             int uid = Convert.ToInt32(Session["CurrentUserID"]);
@@ -138,7 +141,7 @@ namespace StackOverFlowImitationsProject.Controllers
             }
 
         }
-
+        [UserAuthorizationFIlterAttribute]
         public ActionResult ChanagePassword()
         {
             int uid = Convert.ToInt32(Session["CurrentUserID"]);

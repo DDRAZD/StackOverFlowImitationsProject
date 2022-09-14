@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using StackOverflowProject.ServiceLayer;
 using StackOverflowProject.ViewModels;
+using StackOverFlowImitationsProject.Filters;
 
 namespace StackOverFlowImitationsProject.Controllers
 {
@@ -38,6 +39,7 @@ namespace StackOverFlowImitationsProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [UserAuthorizationFIlter]
         public ActionResult AddAnswer(NewAnswerVIewModel navm)
         {
            //all the fields thare are not submitted in the form are initiailized here before inserted to the DB
@@ -62,5 +64,59 @@ namespace StackOverFlowImitationsProject.Controllers
             
 
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [UserAuthorizationFIlter]
+        public ActionResult EditAnswer(EditAnswerViewModel eavm)
+        {
+            eavm.AnswerDateAndTime = DateTime.Now;
+            eavm.VotesCount = 0; //initializing it as it is now a new answer essentially
+            eavm.UserID = Convert.ToInt32(Session["CurrentUserID"]);
+
+            if(ModelState.IsValid)
+            {
+                this.asr.UpdateAnswer(eavm);
+                return RedirectToAction("View","Question", new {qID = eavm.QuestionID, });
+
+            }
+            else
+            {
+                ModelState.AddModelError("x", "invliad data");
+                QuestionViewModel questionViewModel = this.qs.GetQuestionByID(eavm.QuestionID, eavm.UserID);
+                return View("View", questionViewModel);//first argument says which view to go for, and the second is what that view needs (see action result above)
+            }
+
+            
+
+        }
+        [UserAuthorizationFIlter]
+        public ActionResult Create()
+        {
+            List<CategoryViewModel> categories = this.cs.GetAllCategories();
+            ViewBag.Categories = categories;
+            return View("Create");  
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [UserAuthorizationFIlter]
+        public ActionResult Create(NewQuestionVIewModel nqvm)
+        {
+            nqvm.QuestionDateAndTime = DateTime.Now;
+            nqvm.UserID = Convert.ToInt32(Session["CurrentUserID"]);
+            nqvm.ViewsCount = 0;
+
+            if(ModelState.IsValid)
+            {
+                this.qs.InsertQuestion(nqvm);
+
+
+            }
+            return View();
+        }
+
+
     }
 }

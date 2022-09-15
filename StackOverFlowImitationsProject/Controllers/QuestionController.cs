@@ -104,17 +104,26 @@ namespace StackOverFlowImitationsProject.Controllers
         [UserAuthorizationFIlter]
         public ActionResult Create(NewQuestionVIewModel nqvm)
         {
-            nqvm.QuestionDateAndTime = DateTime.Now;
-            nqvm.UserID = Convert.ToInt32(Session["CurrentUserID"]);
-            nqvm.ViewsCount = 0;
+            
 
             if(ModelState.IsValid)
             {
+                nqvm.AnswersCount = 0;
+                nqvm.ViewsCount = 0;
+                nqvm.QuestionDateAndTime = DateTime.Now;
+                nqvm.UserID = Convert.ToInt32(Session["CurrentUserID"]);
+                nqvm.ViewsCount = 0;
                 this.qs.InsertQuestion(nqvm);
+                return RedirectToAction("Questions", "home");
 
 
             }
-            return View();
+            else
+            {
+                ModelState.AddModelError("x", "invliad data");
+                return RedirectToAction("Create", "Question");
+            }
+            
         }
 
 
